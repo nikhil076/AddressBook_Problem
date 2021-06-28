@@ -3,8 +3,7 @@ package com.bridgrlabz.addressbook;
 import java.util.Scanner;
 
 
-public class AddressBook
-{
+public class AddressBook {
 	private String first;
 	private String last;
 	private String address;
@@ -17,8 +16,7 @@ public class AddressBook
 
 	static Scanner scanner = new Scanner(System.in);
 
-	public AddressBook(String first, String last, String address,String city,int zip,int phoneNumber,String state, String email) 
-	{
+	public AddressBook(String first, String last, String address,String city,int zip,int phoneNumber,String state, String email) {
 		this.last = last;
 		this.first = first;
 		this.email = email;
@@ -29,13 +27,11 @@ public class AddressBook
 		this.phoneNumber= phoneNumber;
 	}
 
-	public AddressBook()
-	{
+	public AddressBook() {
 		super();
 	}
 
-	public void readEntry()
-	{
+	public void readEntry() {
 		System.out.println("First Name:" + first);
 		System.out.println("Last Name:" + last);
 		System.out.println("Address:" + address);
@@ -46,103 +42,91 @@ public class AddressBook
 		System.out.println("Email:" + email);
 	}
 
-	public String getFirst()
-	{
+	public String getFirst() {
 		return first;
 	}
 
-	public void setFirst(String first) 
-	{
+	public void setFirst(String first) {
 		this.first = first;
 	}
 
-	public String getLast()
-	{
+	public String getLast() {
 		return last;
 	}
 
-	public void setLast(String last)
-	{
+	public void setLast(String last) {
 		this.last = last;
 	}
 
-	public String getAddress()
-	{
+	public String getAddress() {
 		return address;
 	}
 
-	public void setAddress(String address)
-	{
+	public void setAddress(String address) {
 		this.address = address;
 	}
 
-	public String getEmail()
-	{
+	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(String email)
-	{
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	public void editEntry()
-	{
+	public void editEntry() {
 
 	}
 	
-	public String getCity()
-	{
+	public String getCity() {
 		return city;
 	}
 
-	public void setCity(String city)
-	{
+	public void setCity(String city) {
 		this.city = city;
 	}
 
-	public String getState()
-	{
+	public String getState() {
 		return state;
 	}
 
-	public void setState(String state)
-	{
+	public void setState(String state) {
 		this.state = state;
 	}
 	
-	public int getZip()
-	{
+	public int getZip() {
 		return zip;
 	}
 
-	public void setZip(int zip) 
-	{
+	public void setZip(int zip) {
 		this.zip = zip;
 	}
 	
 	
-	public int getPhoneNumber()
-	{
+	public int getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(int phoneNumber)
-	{
+	public void setPhoneNumber(int phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 	
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return "AddressBook [first=" + first + ", last=" + last + ", address=" + address + ", city=" + city + ", state="
 				+ state + ", zip=" + zip + ", phoneNumber=" + phoneNumber + ", email=" + email + "]";
 	}
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
+		int numberOfContacts;
+		System.out.println("Enter number of required contacts :");
+
+		try {
+			numberOfContacts = scanner.nextInt();
 			addressBook = new AddressBook();
-			AddressBook arrayOfContacts[] = new AddressBook[1];
+			AddressBook arr[] = new AddressBook[numberOfContacts];
+			for (int index = 0; index < numberOfContacts; index++)
+			{
 				System.out.println("Enter First Name : ");
 				addressBook.setFirst(scanner.next());
 				System.out.println("Enter Last Name :");
@@ -159,12 +143,16 @@ public class AddressBook
 				addressBook.setPhoneNumber(scanner.nextInt());
 				System.out.println("Enter email :");
 				addressBook.setEmail(scanner.next());
-				arrayOfContacts[1] = addressBook;	
-				
-			System.out.println();
-
-			for (AddressBook addContact : arrayOfContacts) {
+				arr[index] = addressBook;	
+			}
+			for (AddressBook addContact : arr) {
 				System.out.println(addContact);
 			}
-	} 
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 }
