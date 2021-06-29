@@ -111,10 +111,10 @@ public class AddressBook
 	public static void deleteUser(String name,String[] user)
 	{
 		System.out.println("Enter the name to check for details :");
-		for(int i =0 ;i<arrayOfContacts.length;i++)
+		for(int index =0 ;index<arrayOfContacts.length;index++)
 		{
 			
-			if(arrayOfContacts[i].getFirst().equals(name))
+			if(arrayOfContacts[index].getFirst().equals(name))
 			{
 				for(int j=0;j<user.length;j++)
 				{
