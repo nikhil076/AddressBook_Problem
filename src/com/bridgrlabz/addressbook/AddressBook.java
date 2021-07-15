@@ -15,7 +15,7 @@ public class AddressBook {
 		do 
 		{
 			System.out.println(
-					"Enter choice from the below list :\n1.Add \n2.Exit \n3.Print all contacts \n4.Edit contacts \n5.Delete contact");
+					"Enter choice from the below list :\n1.Add \n2.Exit \n3.Print all contacts \n4.Edit contacts \n5.Delete contact\n6.To get all persons in same city or state\n7.To get all contacts details of user in same city or state");
 			userValue = scanner.nextInt();
 			switch (userValue) 
 			{
@@ -48,6 +48,10 @@ public class AddressBook {
 			{
 				searchByCityOrState_ShouldReturnFirstName();
 				break;
+			}
+			case 7:
+			{
+				searchByCityOrState_ShouldReturnContacts();
 			}
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + userValue);
@@ -143,6 +147,18 @@ public class AddressBook {
 			if (value.getCity().equals(searchingValue) || value.getState().equals(searchingValue)) 
 			{
 				System.out.println(key);
+			}
+		});
+	}
+	private static void searchByCityOrState_ShouldReturnContacts() 
+	{
+		System.out.println("Enter the City or State to view all person ");
+		String searchingValue = scanner.next();
+		dictionary.forEach((key, value) -> 
+		{
+			if (value.getCity().equals(searchingValue) || value.getState().equals(searchingValue)) 
+			{
+				System.out.println(value);
 			}
 		});
 	}
