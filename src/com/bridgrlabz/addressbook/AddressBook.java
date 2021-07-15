@@ -3,8 +3,6 @@ package com.bridgrlabz.addressbook;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.Scanner;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 public class AddressBook {
 	static Contacts addressBook;
@@ -51,7 +49,7 @@ public class AddressBook {
 			}
 		} while (userValue != 2);
 	}
-
+//to delete contact from the hash map
 	private static void deleteUser() 
 	{
 		System.out.println("Enter first name :");
@@ -61,7 +59,7 @@ public class AddressBook {
 		} else
 			System.out.println(firstName + " user does not exist");
 	}
-
+//to print all contacts in the hashmap
 	private static void printAllContacts() 
 	{
 		dictionary.forEach((key, value) -> {
@@ -69,11 +67,12 @@ public class AddressBook {
 		});
 
 	}
-
+//adding values in the Hashmap
 	public static void addUser() {
 		addressBook = new Contacts();
 		System.out.println("Enter First Name : ");
 		addressBook.setFirst(scanner.next());
+		//checking for duplicate values
 		if (checkUserExist(addressBook.getFirst())) {
 			System.out.println("Enter Last Name :");
 			addressBook.setLast(scanner.next());
@@ -94,11 +93,12 @@ public class AddressBook {
 		} else
 			System.out.println("User already exist with name " + addressBook.getFirst());
 	}
-
+// to edit user details using first name 
 	public static void EditUser() {
 		addressBook = new Contacts();
 		System.out.println("Enter First Name : ");
 		addressBook.setFirst(scanner.next());
+		//to check if the contact exist
 		if (!checkUserExist(addressBook.getFirst())) {
 			System.out.println("Enter Last Name :");
 			addressBook.setLast(scanner.next());
@@ -121,7 +121,7 @@ public class AddressBook {
 		} else
 			System.out.println("User doesnt exists with username : " + addressBook.getFirst());
 	}
-
+//to check user existence in the hashmap 
 	private static boolean checkUserExist(String first) {
 		if (dictionary.containsKey(first)) {
 			return false;
