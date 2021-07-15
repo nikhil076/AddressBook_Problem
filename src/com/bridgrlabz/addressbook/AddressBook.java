@@ -44,6 +44,11 @@ public class AddressBook {
 				deleteUser();
 				break;
 			}
+			case 6:
+			{
+				searchByCityOrState_ShouldReturnFirstName();
+				break;
+			}
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + userValue);
 			}
@@ -127,5 +132,18 @@ public class AddressBook {
 			return false;
 		}
 		return true;
+	}
+	
+	private static void searchByCityOrState_ShouldReturnFirstName() 
+	{
+		System.out.println("Enter the City or State to view all person ");
+		String searchingValue = scanner.next();
+		dictionary.forEach((key, value) -> 
+		{
+			if (value.getCity().equals(searchingValue) || value.getState().equals(searchingValue)) 
+			{
+				System.out.println(key);
+			}
+		});
 	}
 }
