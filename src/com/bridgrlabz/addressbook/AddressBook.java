@@ -5,6 +5,7 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 
 public class AddressBook {
+	static int count = 0;
 	static Contacts addressBook;
 	static Map<String, Contacts> dictionary = new HashMap<String, Contacts>();
 	static Scanner scanner = new Scanner(System.in);
@@ -15,7 +16,7 @@ public class AddressBook {
 		do 
 		{
 			System.out.println(
-					"Enter choice from the below list :\n1.Add \n2.Exit \n3.Print all contacts \n4.Edit contacts \n5.Delete contact\n6.To get all persons in same city or state\n7.To get all contacts details of user in same city or state");
+					"Enter choice from the below list :\n1.Add \n2.Exit \n3.Print all contacts \n4.Edit contacts \n5.Delete contact\n6.To get all persons in same city or state\n7.To get all contacts details of user in same city or state\n8.To get number of contacts with same city or state");
 			userValue = scanner.nextInt();
 			switch (userValue) 
 			{
@@ -52,6 +53,12 @@ public class AddressBook {
 			case 7:
 			{
 				searchByCityOrState_ShouldReturnContacts();
+				break;
+			}
+			case 8 :
+			{
+				searchByCityOrState_ShouldReturnNoOfContacts();
+				break;
 			}
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + userValue);
@@ -152,7 +159,7 @@ public class AddressBook {
 	}
 	private static void searchByCityOrState_ShouldReturnContacts() 
 	{
-		System.out.println("Enter the City or State to view all person ");
+		System.out.println("Enter the City or State to view all contact details ");
 		String searchingValue = scanner.next();
 		dictionary.forEach((key, value) -> 
 		{
@@ -161,5 +168,18 @@ public class AddressBook {
 				System.out.println(value);
 			}
 		});
+	}
+	private static void searchByCityOrState_ShouldReturnNoOfContacts() 
+	{
+		System.out.println("Enter the City or State to view number of contacts with that detail ");
+		String searchingValue = scanner.next();
+		dictionary.forEach((key, value) -> 
+		{
+			if (value.getCity().equals(searchingValue) || value.getState().equals(searchingValue)) 
+			{
+				count++;
+			}
+		});
+		System.out.println("Number of contacts with given city or state is : "+count);
 	}
 }
