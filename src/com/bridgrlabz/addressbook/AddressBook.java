@@ -3,6 +3,10 @@ package com.bridgrlabz.addressbook;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+import com.sun.jdi.Value;
 
 public class AddressBook {
 	static int count = 0;
@@ -149,37 +153,18 @@ public class AddressBook {
 	{
 		System.out.println("Enter the City or State to view all person ");
 		String searchingValue = scanner.next();
-		dictionary.forEach((key, value) -> 
-		{
-			if (value.getCity().equals(searchingValue) || value.getState().equals(searchingValue)) 
-			{
-				System.out.println(key);
-			}
-		});
+		System.out.println(dictionary.values().stream().filter(dictionary -> dictionary.getCity().equals(searchingValue) || dictionary.getState().equals(searchingValue)).map(temp -> temp.first).collect(Collectors.toList()));
 	}
 	private static void searchByCityOrState_ShouldReturnContacts() 
 	{
 		System.out.println("Enter the City or State to view all contact details ");
 		String searchingValue = scanner.next();
-		dictionary.forEach((key, value) -> 
-		{
-			if (value.getCity().equals(searchingValue) || value.getState().equals(searchingValue)) 
-			{
-				System.out.println(value);
-			}
-		});
+		System.out.println(dictionary.values().stream().filter(dictionary -> dictionary.getCity().equals(searchingValue) || dictionary.getState().equals(searchingValue)).collect(Collectors.toList()));
 	}
 	private static void searchByCityOrState_ShouldReturnNoOfContacts() 
 	{
 		System.out.println("Enter the City or State to view number of contacts with that detail ");
 		String searchingValue = scanner.next();
-		dictionary.forEach((key, value) -> 
-		{
-			if (value.getCity().equals(searchingValue) || value.getState().equals(searchingValue)) 
-			{
-				count++;
-			}
-		});
-		System.out.println("Number of contacts with given city or state is : "+count);
+		System.out.println("Number of person with same city or state is :"+dictionary.values().stream().filter(temp -> temp.getCity().equals(searchingValue) || temp.getState().equals(searchingValue)).count());
 	}
 }
