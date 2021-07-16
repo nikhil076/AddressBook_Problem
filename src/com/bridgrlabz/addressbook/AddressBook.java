@@ -20,7 +20,7 @@ public class AddressBook {
 		do 
 		{
 			System.out.println(
-					"Enter choice from the below list :\n1.Add \n2.Exit \n3.Print all contacts \n4.Edit contacts \n5.Delete contact\n6.To get all persons in same city or state\n7.To get all contacts details of user in same city or state\n8.To get number of contacts with same city or state");
+					"Enter choice from the below list :\n1.Add \n2.Exit \n3.Print all contacts \n4.Edit contacts \n5.Delete contact\n6.To get all persons in same city or state\n7.To get all contacts details of user in same city or state\n8.To get number of contacts with same city or state\n9.To sort contact by first name");
 			userValue = scanner.nextInt();
 			switch (userValue) 
 			{
@@ -62,6 +62,11 @@ public class AddressBook {
 			case 8 :
 			{
 				searchByCityOrState_ShouldReturnNoOfContacts();
+				break;
+			}
+			case 9:
+			{
+				sortEntryInAddressBookAlphabeticallyByFirstName();
 				break;
 			}
 			default:
@@ -166,5 +171,9 @@ public class AddressBook {
 		System.out.println("Enter the City or State to view number of contacts with that detail ");
 		String searchingValue = scanner.next();
 		System.out.println("Number of person with same city or state is :"+dictionary.values().stream().filter(temp -> temp.getCity().equals(searchingValue) || temp.getState().equals(searchingValue)).count());
+	}
+	private static void sortEntryInAddressBookAlphabeticallyByFirstName() 
+	{
+		System.out.println(dictionary.entrySet().stream().sorted(Map.Entry.comparingByKey()).collect(Collectors.toList()));
 	}
 }
