@@ -1,5 +1,7 @@
 package com.bridgrlabz.addressbook;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.Scanner;
@@ -68,6 +70,10 @@ public class AddressBook {
 			{
 				sortEntryInAddressBookAlphabeticallyByFirstName();
 				break;
+			}
+			case 10:
+			{
+				sortAccordingToCityStateOrZip();
 			}
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + userValue);
@@ -175,5 +181,9 @@ public class AddressBook {
 	private static void sortEntryInAddressBookAlphabeticallyByFirstName() 
 	{
 		System.out.println(dictionary.entrySet().stream().sorted(Map.Entry.comparingByKey()).collect(Collectors.toList()));
+	}
+	private static void sortAccordingToCityStateOrZip()
+	{
+		String result = Collections.min(dictionary.entrySet(),Entry.comparingByValue()).getKey;
 	}
 }
