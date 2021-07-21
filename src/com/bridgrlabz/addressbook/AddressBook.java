@@ -1,18 +1,22 @@
 package com.bridgrlabz.addressbook;
 
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.Scanner;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import com.sun.jdi.Value;
 
 public class AddressBook {
+	public static String ADDRESSBOOK_FILENAME = "./somefile.txt";
 	static int count = 0;
 	static Contacts addressBook;
+	static List<Contacts> contact = new ArrayList<>();
 	static Map<String, Contacts> dictionary = new HashMap<String, Contacts>();
 	static Scanner scanner = new Scanner(System.in);
 
@@ -74,6 +78,27 @@ public class AddressBook {
 			case 10:
 			{
 				sortAccordingToCityStateOrZip();
+				break;
+			}
+			case 11:
+			{
+				writeDataIntoFile();
+				break;
+			}
+			case 12:
+			{
+				readDataFromFile();
+				break;
+			}
+			case 13:
+			{
+				printData();
+				break;
+			}
+			case 14:
+			{
+				display();
+				break;
 			}
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + userValue);
@@ -184,6 +209,57 @@ public class AddressBook {
 	}
 	private static void sortAccordingToCityStateOrZip()
 	{
-		String result = Collections.min(dictionary.entrySet(),Entry.comparingByValue()).getKey;
+		List<Contacts> contactDetailList = dictionary.stream().filter(person1 -> person1.getCity().equalsIgnoreCase(city)).collect(Collectors.toList());
+        contactDetailList.stream().forEach(System.out::println);
+        Map<String, Contacts> map = contactDetailList.stream().collect(Collectors.toMap(Contacts::getFirst, contactDetail -> contactDetail));
+        System.out.println();	
+    }
+	//To write contact details in file 
+	public static void writeDataIntoFile()
+	{
+		List<Contacts> contactsList = new ArrayList<>();
+		StringBuffer addressBuffer = new StringBuffer();
+		contactsList.forEach(address -> {
+			String addressDataString = address.toString().concat("\n");
+			addressBuffer.append(addressDataString);
+		});
+		try 
+		{
+			Files.write(Paths.get(ADDRESSBOOK_FILENAME), addressBuffer.toString().getBytes());
+		} catch (Exception e) 
+		{
+		}
+	}
+	
+	//to read Contact details from file 
+	public static List<Contacts> readDataFromFile()
+	{	
+		List<Contacts> contactDetailList = new ArrayList<>();
+		try 
+		{
+			Files.lines(new File(ADDRESSBOOK_FILENAME).toPath()).map(line -> line.trim()).forEach(line -> System.out.println(line));
+		} catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		return contactDetailList;
+	}
+	//to print data in the file
+	public static void printData()
+	{
+		try 
+		{
+			Files.lines(new File(ADDRESSBOOK_FILENAME).toPath()).forEach(System.out::println);
+		} catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public static void display()
+	{
+		for (Contacts contactDetails : contact) {
+			System.out.println(contactDetails);
+		}
 	}
 }
